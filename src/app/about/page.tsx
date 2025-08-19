@@ -1,11 +1,13 @@
 import Hero from "@/components/sections/hero/Hero";
-import { SmoothCursorDemo } from "@/components/ui/Cursor";
 
+import React from "react";
 
-export default function Home() {
+function about() {
   return (
     <main>
       <Hero />
     </main>
   );
 }
+
+export default about;

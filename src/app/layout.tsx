@@ -5,6 +5,7 @@ import type { ReactNode } from "react";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ui/theme-provider"
+import { SmoothCursorDemo } from "@/components/ui/Cursor";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -39,6 +40,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             {children}
           </ThemeProvider>
         </body>
+         <SmoothCursorDemo />
       </html>
     </>
   )

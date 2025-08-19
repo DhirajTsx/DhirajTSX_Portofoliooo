@@ -9,7 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@radix-ui/react-navigation-menu": "^1.2.13",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/icons-material": "^7.3.1",
+    "@mui/material": "^7.3.1",
+    "@radix-ui/react-navigation-menu": "^1.2.14",
     "@radix-ui/react-slot": "^1.2.3",
     "class-variance-authority": "^0.7.1",
     "lucide-react": "^0.540.0",
