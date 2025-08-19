@@ -38,13 +38,15 @@ export default function Navbar() {
    <nav className="fixed top-0 left-0 w-full z-50 transition-colors">
   <div className="container mx-auto flex items-center justify-between p-4 md:justify-around">
     <Link href="/" className="flex items-center" draggable="true">
-      <Image
-        src={resolvedTheme === "dark" ? LogoDark : LogoLight}
-        alt="Logo"
-        width={65}
-        height={65}
-        className="pointer-events-none select-none"
-      />
+     <Image
+  src={resolvedTheme === "dark" ? LogoDark : LogoLight}
+  alt="Logo"
+  width={65}
+  height={65}
+  className="pointer-events-none select-none"
+  style={{ width: "65px", height: "auto" }} // keep aspect ratio
+/>
+
     </Link>
 
    <ul className="hidden md:flex items-center gap-1.5 text-[14px] backdrop-blur-lg border border-white/10 rounded-xl px-3 py-2">
