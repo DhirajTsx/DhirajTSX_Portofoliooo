@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import ThemeToggleButton from "@/components/ui/theme-toggle-button";
@@ -9,6 +10,13 @@ import LogoDark from "@/public/DarkLogo.svg";
 
 export default function Navbar() {
   const { resolvedTheme } = useTheme(); 
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);  
+  }, []);
+
+  if (!mounted) return null; 
 
   return (
     <nav className="fixed top-0 left-0 w-full bg-transparent p-4 z-50">
@@ -27,11 +35,6 @@ export default function Navbar() {
         {/* Theme toggle */}
         <div className="flex items-center gap-4">
           <ThemeToggleButton />
-
-{/*       
-          <button className="md:hidden p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-white">
-
-          </button> */}
         </div>
       </div>
     </nav>
