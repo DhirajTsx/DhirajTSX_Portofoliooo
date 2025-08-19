@@ -5,7 +5,7 @@ import { GridPattern } from "@/components/magicui/grid-pattern";
 
 export function GridPatternDemo() {
   return (
-    <div className="relative flex h-[500px] w-full flex-col items-center justify-center overflow-hidden rounded-lg border bg-background">
+    <div className="relative flex h-[500px] w-full flex-col items-center justify-center overflow-hidden rounded-lg border bg-background -z-10">
       <GridPattern
         squares={[
           [4, 4],

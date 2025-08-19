@@ -15,7 +15,6 @@ type SpotlightProps = {
 };
 
 export const Spotlight = ({
-  // ⬆️ Slight bump: +0.02–0.01 each stop
 gradientFirst  = "radial-gradient(70% 70% at 50% 30%, hsla(45, 100%, 85%, 0.14) 0%, hsla(40, 100%, 65%, 0.08) 40%, hsla(35, 100%, 45%, 0) 70%)",
 
 gradientSecond = "radial-gradient(50% 50% at 50% 50%, hsla(50, 100%, 80%, 0.10) 0%, hsla(40, 100%, 55%, 0.05) 60%, transparent 100%)",
@@ -41,7 +40,7 @@ gradientThird  = "radial-gradient(50% 50% at 50% 50%, hsla(35, 100%, 75%, 0.06) 
       transition={{
         duration: 1.5,
       }}
-      className="pointer-events-none absolute inset-0 h-full w-full"
+      className="pointer-events-none  absolute inset-0 h-full w-full"
     >
       <motion.div
         animate={{
