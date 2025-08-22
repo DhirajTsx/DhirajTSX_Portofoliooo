@@ -36,10 +36,24 @@ export default function Navbar() {
       href: "/hireme",
       icon: <ConnectWithoutContactIcon fontSize="small" />,
     },
+    {
+      name: "Book a Call",
+      href: "/",
+    },
   ];
 
+  const activeColors = {
+    Home: "text-purple-500 dark:text-purple-400",
+    About: "text-[#FF9B00] dark:text-[#FFB347]",
+    Work: "text-red-500 dark:text-red-400",
+    Blog: "text-green-500 dark:text-green-400",
+    "Hire Me": "text-pink-500 dark:text-pink-400",
+  } as const;
+
+  type ActiveColorKeys = keyof typeof activeColors;
+
   return (
-    <nav className="fixed font-[var(--font-outfit) top-0 left-0 w-full z-50 transition-colors font-[300]">
+    <nav className="fixed font-[var(--font-outfit)] top-0 left-0 w-full z-50 transition-colors">
       <div className="container mx-auto flex items-center justify-between sm:p-5 p-6.5 md:justify-around">
         <Link href="/" className="flex items-center" draggable="true">
           <Image
@@ -50,18 +64,10 @@ export default function Navbar() {
           />
         </Link>
 
-        <ul className="hidden md:flex items-center gap-1.5 text-[14px] backdrop-blur-lg border border-white/10 rounded-full px-2 py-1">
+        <ul className="hidden md:flex items-center gap-1.5 text-[14px] backdrop-blur-sm bg-transparent border border-white/10 rounded-full px-2 py-1">
           {navLinks.map((link) => {
-            const isActive = pathname === link.href;
-            const activeColors = {
-              Home: "text-purple-500 dark:text-purple-400",
-              About: "text-[#FF9B00] dark:text-[#FFB347]",
-              Work: "text-red-500 dark:text-red-400",
-              Blog: "text-green-500 dark:text-green-400",
-              "Hire Me": "text-pink-500 dark:text-pink-400",
-            } as const;
-
-            type ActiveColorKeys = keyof typeof activeColors;
+            const isActive =
+              link.name === "Book a Call" ? true : pathname === link.href;
 
             return (
               <motion.li
@@ -71,25 +77,20 @@ export default function Navbar() {
               >
                 <Link
                   href={link.href}
-                  className="group flex items-center text-[12px] gap-1 px-2.5 py-2 rounded-full transition-all duration-300 hover:bg-black/20 dark:hover:bg-white/10"
+                  className={`group flex items-center text-[12px] gap-1 px-3 py-1.5 rounded-full transition-all duration-300 ${
+                    link.name === "Book a Call"
+                      ? "text-white backdrop-blur-[20px] bg-white/20  dark:bg-black  dark:border-black/30 shadow-lg"
+                      : isActive
+                      ? activeColors[link.name as ActiveColorKeys]
+                      : "text-white dark:text-black hover:bg-black/20 dark:hover:bg-white/10"
+                  }`}
                 >
-                  <span
-                    className={`flex items-center justify-center ${
-                      isActive
-                        ? activeColors[link.name as ActiveColorKeys]
-                        : "text-white dark:text-black"
-                    }`}
-                  >
-                    {link.icon}
-                  </span>
-                  <motion.span
-                    className={`flex items-center whitespace-nowrap transition-colors duration-300 ${
-                      isActive
-                        ? activeColors[link.name as ActiveColorKeys]
-                        : "text-white dark:text-black"
-                    }`}
-                    initial={false}
-                  >
+                  {link.icon && (
+                    <span className="flex items-center justify-center">
+                      {link.icon}
+                    </span>
+                  )}
+                  <motion.span className="flex items-center whitespace-nowrap transition-colors duration-300">
                     {link.name}
                   </motion.span>
                 </Link>
