@@ -4,7 +4,7 @@ import React from "react"
 import { MoonIcon, SunIcon } from "lucide-react"
 import { useTheme } from "next-themes"
 import { Button } from "@/components/ui/button"
-
+import { motion } from "framer-motion"
 import {
   AnimationStart,
   AnimationVariant,
@@ -14,17 +14,15 @@ import {
 interface ThemeToggleAnimationProps {
   variant?: AnimationVariant
   start?: AnimationStart
-  showLabel?: boolean
   url?: string
 }
 
 export default function ThemeToggleButton({
   variant = "circle-blur",
   start = "top-left",
-  showLabel = false,
   url = "",
 }: ThemeToggleAnimationProps) {
-  const { theme, setTheme } = useTheme()
+  const { theme, resolvedTheme, setTheme } = useTheme()
 
   const styleId = "theme-transition-styles"
 
@@ -44,7 +42,6 @@ export default function ThemeToggleButton({
 
   const toggleTheme = React.useCallback(() => {
     const animation = createAnimation(variant, start, url)
-
     updateStyles(animation.css, animation.name)
 
     if (typeof window === "undefined") return
@@ -59,18 +56,38 @@ export default function ThemeToggleButton({
     }
 
     document.startViewTransition(switchTheme)
-  }, [theme, setTheme])
+  }, [theme, setTheme, variant, start, url, updateStyles])
 
   return (
-<Button
-  onClick={toggleTheme}
-  variant="clean"
-  size="icon"
-  className="w-9 h-9 p-0 relative text-white dark:text-black"
->
-  <SunIcon className="size-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-  <MoonIcon className="absolute size-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-</Button>
+    <Button
+      onClick={toggleTheme}
+      variant="clean"
+      size="icon"
+      className="w-9 h-9 p-0 relative text-white dark:text-black"
+    >
+      <motion.span
+        initial={{ rotate: 0, scale: 1 }}
+        animate={{
+          rotate: resolvedTheme === "dark" ? -90 : 0,
+          scale: resolvedTheme === "dark" ? 0 : 1,
+        }}
+        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+        className="absolute inset-0 flex items-center justify-center"
+      >
+        <SunIcon className="size-[1.2rem]" />
+      </motion.span>
 
+      <motion.span
+        initial={{ rotate: 90, scale: 0 }}
+        animate={{
+          rotate: resolvedTheme === "dark" ? 0 : 90,
+          scale: resolvedTheme === "dark" ? 1 : 0,
+        }}
+        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+        className="absolute inset-0 flex items-center justify-center"
+      >
+        <MoonIcon className="size-[1.2rem]" />
+      </motion.span>
+    </Button>
   )
 }
