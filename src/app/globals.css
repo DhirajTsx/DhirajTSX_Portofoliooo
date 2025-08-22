@@ -42,10 +42,9 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
 
-
   /* Aurora Text */
   --animate-aurora: aurora 8s ease-in-out infinite alternate;
- 
+
   @keyframes aurora {
     0% {
       background-position: 0% 50%;
@@ -69,6 +68,14 @@
     }
   }
 }
+
+.backdrop-blur-lg {
+  --tw-backdrop-blur: blur(16px);
+  -webkit-backdrop-filter: var(--tw-backdrop-blur);
+  backdrop-filter: var(--tw-backdrop-blur);
+}
+
+
 
 :root {
   --radius: 0.625rem;
@@ -145,5 +152,15 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+
+  ::selection {
+    background-color: #9a29ea93; 
+    color: #f0dbffda; 
+  }
+
+  .dark ::selection {
+    background-color: oklch(0% 0 0); 
+    color: oklch(100% 0.00011 271.152 / 0.829); 
   }
 }

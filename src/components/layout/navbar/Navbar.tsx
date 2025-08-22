@@ -39,17 +39,18 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 transition-colors">
+    <nav className="fixed font-[var(--font-outfit) top-0 left-0 w-full z-50 transition-colors font-[300]">
       <div className="container mx-auto flex items-center justify-between sm:p-5 p-6.5 md:justify-around">
         <Link href="/" className="flex items-center" draggable="true">
           <Image
             src={resolvedTheme === "dark" ? LogoDark : LogoLight}
             alt="Logo"
             className="w-[50px] sm:w-[65px] h-auto pointer-events-none select-none"
+            priority
           />
         </Link>
 
-        <ul className="hidden md:flex items-center gap-1.5 text-[14px] backdrop-blur-lg border border-white/10 rounded-xl px-3 py-2">
+        <ul className="hidden md:flex items-center gap-1.5 text-[14px] backdrop-blur-lg border border-white/10 rounded-full px-2 py-1">
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
             const activeColors = {
@@ -70,7 +71,7 @@ export default function Navbar() {
               >
                 <Link
                   href={link.href}
-                  className="group flex items-center gap-1 px-3 py-2 rounded-full transition-all duration-300 hover:bg-black/20 dark:hover:bg-white/10"
+                  className="group flex items-center text-[12px] gap-1 px-2.5 py-2 rounded-full transition-all duration-300 hover:bg-black/20 dark:hover:bg-white/10"
                 >
                   <span
                     className={`flex items-center justify-center ${
