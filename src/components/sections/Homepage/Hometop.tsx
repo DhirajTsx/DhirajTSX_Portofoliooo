@@ -2,13 +2,17 @@
 
 import React, { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
+import { cn } from "@/lib/utils"; // 👈 ye missing tha
 
 import { ShootingStars } from "@/components/ui/shooting-stars";
 import { Spotlight } from "@/components/ui/spotlight-new";
 import { StarsBackground } from "@/components/ui/stars-background";
-import { GridPattern } from "@/components/magicui/grid-pattern";
 import { AuroraText } from "@/components/magicui/aurora-text";
 
+import { InteractiveGridPattern } from "@/components/magicui/interacticeGrid";
+import InterativeDemo from "@/components/ui/interactiveGridDemo";
+import { MacbookScroll } from "@/components/ui/macbook-scroll";
+import image from "@/assets/images/MeBNW.png"
 
 function HomeTop() {
   const { resolvedTheme } = useTheme();
@@ -28,24 +32,19 @@ function HomeTop() {
       className="relative w-full font-[var(--font-outfit)] min-h-screen flex flex-col items-center justify-center overflow-hidden bg-black dark:bg-white transition-colors duration-300"
     >
       {resolvedTheme === "dark" ? (
-        <GridPattern className="absolute inset-0 z-[20]" />
+        <InterativeDemo />
       ) : (
         <>
           <StarsBackground className="absolute inset-0" />
           <ShootingStars className="absolute inset-0" />
         </>
       )}
+
+      {/* Spotlight always visible */}
       <Spotlight />
-       <div>
-              <AuroraText className="text-[30px]  font-[var(--font-geist-sans)]">
-                <span className=" font-300">
-                  Hello
-                </span>
-              </AuroraText>
+      <div>
+        <MacbookScroll  src={image}/>
       </div>
-      
-      
- 
     </div>
   );
 }

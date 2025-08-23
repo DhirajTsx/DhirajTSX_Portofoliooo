@@ -8,7 +8,7 @@ import { MobileDock } from "@/components/layout/navbar/MobileDock";
 import type { Metadata } from "next";
 
 const outfit = Outfit({
-  variable: "--font-geist-sans",
+  variable: "--font-outfit",
   subsets: ["latin"],
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
   display: 'swap',
