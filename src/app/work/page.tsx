@@ -1,10 +1,10 @@
-import Hero from '@/components/sections/Homepage/Hometop'
-import React from 'react'
+import Hometop from '@/components/sections/Homepage/Hometop'
+
 
 function work() {
   return (
     <main>
-      <Hero />
+      <Hometop />
     </main>
   )
 }

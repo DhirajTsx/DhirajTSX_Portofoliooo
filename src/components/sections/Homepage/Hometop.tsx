@@ -10,7 +10,7 @@ import { GridPattern } from "@/components/magicui/grid-pattern";
 import { AuroraText } from "@/components/magicui/aurora-text";
 
 
-function Hero() {
+function HomeTop() {
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -50,4 +50,4 @@ function Hero() {
   );
 }
 
-export default Hero;
+export default HomeTop;

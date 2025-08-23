@@ -1,4 +1,4 @@
-import Hero from '@/components/sections/Homepage/Hometop'
+import Hometop from '@/components/sections/Homepage/Hometop'
 
 import React from 'react'
 
@@ -6,7 +6,7 @@ function blog() {
   return (
        <main>
       
-      <Hero />
+      <Hometop />
        </main>
   )
 }

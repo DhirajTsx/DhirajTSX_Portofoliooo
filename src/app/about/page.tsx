@@ -1,11 +1,11 @@
-import Hero from "@/components/sections/Homepage/Hometop";
+import Hometop from "@/components/sections/Homepage/Hometop";
 
 import React from "react";
 
 function about() {
   return (
     <main>
-      <Hero />
+      <Hometop />
     </main>
   );
 }
