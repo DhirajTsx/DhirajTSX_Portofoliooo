@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Outfit } from "next/font/google";
+import { Outfit, Geist } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import { SmoothCursorDemo } from "@/components/ui/Cursor";
@@ -7,12 +7,20 @@ import Navbar from "@/components/layout/navbar/Navbar";
 import { MobileDock } from "@/components/layout/navbar/MobileDock";
 import type { Metadata } from "next";
 
-const geistSans = Outfit({
+const outfit = Outfit({
   variable: "--font-geist-sans",
   subsets: ["latin"],
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
   display: 'swap',
 });
+
+const geist = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+  display: 'swap',
+});
+
 
 // Portfolio Metadata
 export const metadata: Metadata = {
@@ -72,7 +80,7 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en" suppressHydrationWarning className={geistSans.variable}>
+    <html lang="en" suppressHydrationWarning className={ `${outfit.variable } ${geist.variable} `} >
       <body className=" .dark ::selection">
         <ThemeProvider
           attribute="class"
