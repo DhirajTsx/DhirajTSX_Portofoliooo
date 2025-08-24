@@ -77,40 +77,57 @@ export default function Navbar() {
       </motion.div>
     </Link>
 
-    <ul className="hidden md:flex items-center gap-1 text-[18px] backdrop-blur-sm bg-[#232223] border  border-[#ffffff10] rounded-full px-1 py-1">
-      {navLinks.map((link) => {
-        const isActive = pathname === link.href;
-        const activeClass = activeColors[link.name as ActiveColorKeys] || '';
+ <motion.ul
+  className="hidden md:flex items-center gap-1 text-[18px] backdrop-blur-sm bg-[#232223] border border-[#ffffff10] rounded-full px-1 py-1"
+  initial="hidden"
+  animate="show"
+  variants={{
+    hidden: { opacity: 0, y: -10 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        staggerChildren: 0.08, // each li animates one after another
+        delayChildren: 0.2,
+        ease: "easeOut",
+      },
+    },
+  }}
+>
+  {navLinks.map((link) => {
+    const isActive = pathname === link.href;
+    const activeClass = activeColors[link.name as ActiveColorKeys] || '';
 
-        return (
-          <motion.li
-            key={link.name}
-            className="relative flex items-center"
-            layout
-            initial={{ opacity: 0, y: -5 }}
-            animate={{ opacity: 1, y: 0 }}
-            whileHover={{ scale: 1.03 }}
-            transition={{ type: "spring", stiffness: 300, damping: 20 }}
-          >
-            <Link
-              href={link.href}
-              className={`group flex items-center  text-[12px] gap-0.5 px-3 py-1 rounded-full transition-all duration-300 ${
-                link.name === "Book a Call"
-                  ? "text-[#ffffffbd] backdrop-blur-[20px] bg-white/10 hover:bg-white/20 dark:border-black/30 shadow-[0_0px_10px_1px_rgba(255,255,255,0.3)] dark:shadow-[0_0px_10px_0.9px_#FFFFFF66]"
-                  : isActive
-                  ? activeClass
-                  : "text-[#ffffffd5] dark:text-[#ffffffea] hover:bg-white/10 dark:hover:bg-white/10"
-              }`}
-            >
-              {link.icon && <span className="flex items-center justify-center">{link.icon}</span>}
-              <span className="flex items-center whitespace-nowrap transition-colors duration-300">
-                {link.name}
-              </span>
-            </Link>
-          </motion.li>
-        );
-      })}
-    </ul>
+    return (
+      <motion.li
+        key={link.name}
+        className="relative flex items-center"
+        variants={{
+          hidden: { opacity: 0, y: -8 },
+          show: { opacity: 1, y: 0 },
+        }}
+        whileHover={{ scale: 1.05 }}
+        transition={{ type: "spring", stiffness: 250, damping: 18 }}
+      >
+        <Link
+          href={link.href}
+          className={`group flex items-center text-[12px] gap-0.5 px-3 py-1 rounded-full transition-all duration-300 ${
+            link.name === "Book a Call"
+              ? "text-[#ffffffbd] backdrop-blur-[20px] bg-white/10 hover:bg-white/20 dark:border-black/30 shadow-[0_0px_10px_1px_rgba(255,255,255,0.3)] dark:shadow-[0_0px_10px_0.9px_#FFFFFF66]"
+              : isActive
+              ? activeClass
+              : "text-[#ffffffd5] dark:text-[#ffffffea] hover:bg-white/10 dark:hover:bg-white/10"
+          }`}
+        >
+          {link.icon && <span className="flex items-center justify-center">{link.icon}</span>}
+          <span className="flex items-center whitespace-nowrap transition-colors duration-300">
+            {link.name}
+          </span>
+        </Link>
+      </motion.li>
+    );
+  })}
+</motion.ul>
 
     <div className="flex items-center gap-2">
       <motion.div
