@@ -56,6 +56,7 @@ export default function Navbar() {
 
   return (
   <nav className="fixed font-[var(--font-outfit)] top-0 left-0 w-full z-50 transition-colors">
+    
   <div className="container mx-auto flex items-center justify-between sm:p-5 p-6.5 md:justify-around">
     <Link href="/">
       <motion.div

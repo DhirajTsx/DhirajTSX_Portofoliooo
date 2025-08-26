@@ -54,7 +54,7 @@ export const Spotlight = ({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 2 }}
-      className="pointer-events-none absolute inset-0 h-full w-full"
+      className="pointer-events-none absolute- -z-10 inset-0 h-full w-full"
     >
       {/* Left diagonal gradients */}
       <motion.div
