@@ -9,11 +9,9 @@ import InteractiveDemo from "@/components/ui/interactiveGridDemo";
 import { WobbleCard } from "@/components/ui/wobble-card";
 import Image from "next/image";
 import linearDemo from "@/assets/images/MeColor.png";
-import BlackAndWhite from "@/assets/images/MeBNW.png";
 import ProgressiveBlur from "@/components/magicui/ProgressiveBlur";
 import { SkillsMarquee } from "./gridMarque";
 import { GridPattern } from "@/components/magicui/grid-pattern";
-import { VortexDemo } from "./vortextComp";
 
 function HomeTop() {
   const { resolvedTheme } = useTheme();
