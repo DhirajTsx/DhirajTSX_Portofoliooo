@@ -46,7 +46,7 @@ const hostingSkills = [
 const SkillCard = ({ icon, name }: { icon: React.ReactNode; name: string }) => (
   <figure
     className={cn(
-      "flex items-center justify-center gap-2 bg-[#171717ad] text-white border border-gray-600 dark:border-gray-700 rounded-lg px-2 py-1 shadow-sm hover:shadow-lg transition-all duration-300 cursor-pointer"
+      "flex items-center justify-center gap-2 top-10 bg-[#171717ad] text-white border border-gray-600 dark:border-gray-700 rounded-lg px-2 py-1 shadow-sm hover:shadow-lg transition-all duration-300 cursor-pointer"
     )}
   >
     {icon}
@@ -56,7 +56,7 @@ const SkillCard = ({ icon, name }: { icon: React.ReactNode; name: string }) => (
 
 export function SkillsMarquee() {
   return (
-    <div className="relative flex flex-col items-center justify-center w-full h-full overflow-hidden py-2 gap-2">
+    <div className="relative flex top-12  flex-col items-center justify-center w-full h-full overflow-hidden py-2 gap-2">
       {/* Frontend */}
       <Marquee className="[--duration:30s] flex gap-2 items-center justify-center">
         {frontendSkills.map((skill) => (
@@ -79,8 +79,7 @@ export function SkillsMarquee() {
       </Marquee>
 
       {/* Gradient edges */}
-      <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-background opacity-30 -z-10" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-background opacity-40 -z-10" />
+     
     </div>
   );
 }

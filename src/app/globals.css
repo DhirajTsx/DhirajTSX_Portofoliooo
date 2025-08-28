@@ -4,7 +4,6 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
@@ -45,7 +44,6 @@
   --animate-marquee: marquee var(--duration) infinite linear;
   --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
 
-  
   --animate-aurora: aurora 8s ease-in-out infinite alternate;
 
   @keyframes aurora {
@@ -71,8 +69,6 @@
     }
   }
 
-  
- 
   @keyframes marquee {
     from {
       transform: translateX(0);
@@ -181,11 +177,17 @@
 
   .shadow-glow {
     box-shadow: 0 0 25px rgba(155, 100, 255, 0.6),
-                0 0 50px rgba(155, 100, 255, 0.4);
+      0 0 50px rgba(155, 100, 255, 0.4);
   }
   .shadow-bottom-lg {
     box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.35);
   }
+  .text-shadow {
+    text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.3),
+      0px 0px 20px rgba(255, 255, 255, 0.2),
+      0px 0px 30px rgba(255, 255, 255, 0.1);
+  }
+
 }
 
 @layer base {
