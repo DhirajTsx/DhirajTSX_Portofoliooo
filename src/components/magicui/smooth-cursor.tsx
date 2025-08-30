@@ -193,7 +193,7 @@ export function SmoothCursor({
         zIndex: 100,
         pointerEvents: "none",
         willChange: "transform",
-        opacity: isMoving ? 1 : 0.8, // example usage
+        opacity: isMoving ? 1 : 0.8,
       }}
     >
       {cursor}

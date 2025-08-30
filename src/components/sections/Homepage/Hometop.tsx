@@ -8,7 +8,6 @@ import { StarsBackground } from "@/components/ui/stars-background";
 import InteractiveDemo from "@/components/ui/interactiveGridDemo";
 import ProgressiveBlur from "@/components/magicui/ProgressiveBlur";
 
-
 function HomeTop() {
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
@@ -21,9 +20,7 @@ function HomeTop() {
     );
   }
 
-
-
-
+  const isDark = resolvedTheme === "dark";
 
   return (
     <div
@@ -31,17 +28,16 @@ function HomeTop() {
       className="relative z-[40] w-full font-[var(--font-outfit)] min-h-screen flex flex-col items-center justify-center overflow-hidden bg-black dark:bg-white transition-colors duration-300"
     >
       <ProgressiveBlur position="top" />
-      {resolvedTheme === "dark" ? (
+      {isDark ? (
         <InteractiveDemo />
       ) : (
-        <>
-          <StarsBackground className="absolute inset-0" />
-          <ShootingStars className="absolute inset-0" />
-        </>
+        <div className="absolute inset-0">
+          <StarsBackground />
+          <ShootingStars />
+        </div>
       )}
 
       <Spotlight />
-      
     </div>
   );
 }

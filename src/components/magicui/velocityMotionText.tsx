@@ -11,7 +11,6 @@ import {
 } from "motion/react";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import type { MotionValue } from "motion/react";
-
 import { cn } from "@/lib/utils";
 
 interface ScrollVelocityRowProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -26,7 +25,7 @@ export const wrap = (min: number, max: number, v: number) => {
 };
 
 const ScrollVelocityContext = React.createContext<MotionValue<number> | null>(
-  null,
+  null
 );
 
 export function ScrollVelocityContainer({
@@ -40,6 +39,7 @@ export function ScrollVelocityContainer({
     damping: 50,
     stiffness: 400,
   });
+
   const velocityFactor = useTransform(smoothVelocity, (v) => {
     const sign = v < 0 ? -1 : 1;
     const magnitude = Math.min(5, (Math.abs(v) / 1000) * 5);
@@ -79,17 +79,17 @@ function ScrollVelocityRowImpl({
 }: ScrollVelocityRowImplProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const blockRef = useRef<HTMLDivElement>(null);
-  const [numCopies, setNumCopies] = useState(1);
 
   const baseX = useMotionValue(0);
-  const baseDirectionRef = useRef<number>(direction >= 0 ? 1 : -1);
-  const currentDirectionRef = useRef<number>(direction >= 0 ? 1 : -1);
-  const unitWidth = useMotionValue(0);
+  const unitWidth = useRef(0);
+  const numCopiesRef = useRef(1);
 
+  const currentDirectionRef = useRef(direction >= 0 ? 1 : -1);
   const isInViewRef = useRef(true);
   const isPageVisibleRef = useRef(true);
   const prefersReducedMotionRef = useRef(false);
 
+  const [copiesArray, setCopiesArray] = useState<undefined[]>([undefined]);
   useEffect(() => {
     const container = containerRef.current;
     const block = blockRef.current;
@@ -98,9 +98,12 @@ function ScrollVelocityRowImpl({
     const updateSizes = () => {
       const cw = container.offsetWidth || 0;
       const bw = block.scrollWidth || 0;
-      unitWidth.set(bw);
-      const nextCopies = bw > 0 ? Math.max(3, Math.ceil(cw / bw) + 2) : 1;
-      setNumCopies((prev) => (prev === nextCopies ? prev : nextCopies));
+      unitWidth.current = bw;
+      const copies = bw > 0 ? Math.max(3, Math.ceil(cw / bw) + 2) : 1;
+      if (copies !== numCopiesRef.current) {
+        numCopiesRef.current = copies;
+        setCopiesArray(Array.from({ length: copies }));
+      }
     };
 
     updateSizes();
@@ -135,16 +138,16 @@ function ScrollVelocityRowImpl({
       document.removeEventListener("visibilitychange", handleVisibility);
       mq.removeEventListener("change", handlePRM);
     };
-  }, [children, unitWidth]);
+  }, [children]);
 
-  const x = useTransform([baseX, unitWidth], ([v, bw]) => {
-    const width = Number(bw) || 1;
-    const offset = Number(v) || 0;
-    return `${-wrap(0, width, offset)}px`;
+  const x = useTransform(baseX, (v) => {
+    const width = unitWidth.current || 1;
+    return `${-wrap(0, width, v)}px`;
   });
 
   useAnimationFrame((_, delta) => {
     if (!isInViewRef.current || !isPageVisibleRef.current) return;
+
     const dt = delta / 1000;
     const vf = velocityFactor.get();
     const absVf = Math.min(5, Math.abs(vf));
@@ -152,15 +155,14 @@ function ScrollVelocityRowImpl({
 
     if (absVf > 0.1) {
       const scrollDirection = vf >= 0 ? 1 : -1;
-      currentDirectionRef.current = baseDirectionRef.current * scrollDirection;
+      currentDirectionRef.current = direction * scrollDirection;
     }
 
-    const bw = unitWidth.get() || 0;
-    if (bw <= 0) return;
-    const pixelsPerSecond = (bw * baseVelocity) / 100;
-    const moveBy =
-      currentDirectionRef.current * pixelsPerSecond * speedMultiplier * dt;
-    baseX.set(baseX.get() + moveBy);
+    const pixelsPerSecond = (unitWidth.current * baseVelocity) / 100;
+    baseX.set(
+      baseX.get() +
+        currentDirectionRef.current * pixelsPerSecond * speedMultiplier * dt
+    );
   });
 
   return (
@@ -173,7 +175,7 @@ function ScrollVelocityRowImpl({
         className="inline-flex items-center will-change-transform transform-gpu select-none"
         style={{ x }}
       >
-        {Array.from({ length: numCopies }).map((_, i) => (
+        {copiesArray.map((_, i) => (
           <div
             key={i}
             ref={i === 0 ? blockRef : null}
@@ -187,7 +189,6 @@ function ScrollVelocityRowImpl({
     </div>
   );
 }
-
 function ScrollVelocityRowLocal(props: ScrollVelocityRowProps) {
   const { scrollY } = useScroll();
   const localVelocity = useVelocity(scrollY);

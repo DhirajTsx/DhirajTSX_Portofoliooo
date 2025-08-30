@@ -24,16 +24,13 @@ const Earth: React.FC<EarthProps> = ({
   scale = 1.1,
   diffuse = 1.2,
   mapSamples = 40000,
-  mapBrightness = 6,
+  mapBrightness = 7,
   baseColor = [0.4, 0.6509, 1],
-  markerColor = [1, 0, 0],
-  glowColor = [0.2745, 0.5765, 0.898],
+  markerColor = [1, 2, 3],
+  glowColor = [0.9, 0.9, 0.9],
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const phiRef = useRef(0);
-  const velocityRef = useRef(0);
-  const draggingRef = useRef(false);
-  const lastXRef = useRef(0);
 
   useEffect(() => {
     let width = 0;
@@ -65,43 +62,16 @@ const Earth: React.FC<EarthProps> = ({
         { location: [37.0902, -95.7129], size: 0.1, color: [1, 1, 1] }, // USA
       ],
       onRender: (state) => {
-        phiRef.current += velocityRef.current;
-        velocityRef.current *= 0.98;
+        const autoRotation = 0.0020; 
+        phiRef.current += autoRotation;
         state.phi = phiRef.current;
         state.theta = theta;
       },
     });
 
-    const onPointerDown = (e: PointerEvent) => {
-      draggingRef.current = true;
-      lastXRef.current = e.clientX;
-      canvasRef.current?.setPointerCapture(e.pointerId);
-    };
-
-    const onPointerMove = (e: PointerEvent) => {
-      if (!draggingRef.current) return;
-      const dx = e.clientX - lastXRef.current;
-      velocityRef.current += dx * 0.0001;
-      lastXRef.current = e.clientX;
-    };
-
-    const onPointerUp = (e: PointerEvent) => {
-      draggingRef.current = false;
-      canvasRef.current?.releasePointerCapture(e.pointerId);
-    };
-
-    canvasRef.current?.addEventListener("pointerdown", onPointerDown);
-    canvasRef.current?.addEventListener("pointermove", onPointerMove);
-    canvasRef.current?.addEventListener("pointerup", onPointerUp);
-    canvasRef.current?.addEventListener("pointerleave", onPointerUp);
-
     return () => {
       globe.destroy();
       window.removeEventListener("resize", onResize);
-      canvasRef.current?.removeEventListener("pointerdown", onPointerDown);
-      canvasRef.current?.removeEventListener("pointermove", onPointerMove);
-      canvasRef.current?.removeEventListener("pointerup", onPointerUp);
-      canvasRef.current?.removeEventListener("pointerleave", onPointerUp);
     };
   }, [
     theta,
@@ -129,7 +99,6 @@ const Earth: React.FC<EarthProps> = ({
           height: "100%",
           maxWidth: "100%",
           aspectRatio: "1",
-          touchAction: "none",
         }}
       />
     </div>

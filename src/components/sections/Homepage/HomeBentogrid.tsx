@@ -15,6 +15,8 @@ import { ScrollBasedVelocityDemo } from "./MotionTextGrid";
 import { motion } from "framer-motion";
 import Earth from "@/components/ui/globe";
 import { FlipText } from "@/components/magicui/FlipText";
+import ProgressiveBlur from "@/components/magicui/ProgressiveBlur";
+import GlassButton from "@/components/customUi/GlassButton";
 function HomeBentogrid() {
   const socialData = [
     {
@@ -34,30 +36,37 @@ function HomeBentogrid() {
     },
   ];
   return (
-    <div className="relative z-[40] w-full font-[var(--font-outfit)] min-h-screen flex flex-col items-center justify-center overflow-hidden bg-black dark:bg-white transition-colors duration-300">
+    <div className="relative  z-[40] w-full font-[var(--font-outfit)] min-h-screen flex flex-col items-center justify-center overflow-hidden bg-black dark:bg-[#FFFFFF] transition-colors duration-300">
+      <ProgressiveBlur position="top" />
       <div className=" grid grid-cols-1 md:grid-cols-6 gap-3 max-w-7xl mx-auto w-full px-5 py-22">
-        <WobbleCard containerClassName="relative shadow-2xl shadow-black md:col-span-4 bg-neutral-900 min-h-[400px] overflow-hidden">
-          <div className="absolute inset-0 top-14">
+        <WobbleCard containerClassName="relative shadow-2xl shadow-black md:col-span-4 bg-neutral-900 min-h-[400px] overflow-hidden group">
+          <motion.div
+            className="absolute inset-0 top-14"
+            initial={{ opacity: 0, x: -100 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.6 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
             <ScrollBasedVelocityDemo />
-          </div>
+          </motion.div>
 
+          {/* Content */}
           <div className="absolute bottom-6 left-0 w-full px-4 md:px-8 z-50">
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
+            <motion.div  initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, ease: "easeOut" }}
-              className="text-sm sm:text-base md:text-lg lg:text-xl text-neutral-200 text-center md:text-left max-w-full md:max-w-md leading-relaxed"
-            >
-              With over 100,000 monthly active bot users, Gippity AI is the most
-              popular AI platform for developers.
-            </motion.p>
+              className="text-sm sm:text-base md:text-lg lg:text-xl text-neutral-200 text-center md:text-left max-w-full md:max-w-md leading-relaxed">
+               <GlassButton text="About Me" href="about" />
+            </motion.div>
           </div>
-          <div className="absolute bottom-0 w-full flex justify-end md:justify-end xl:justify-end 0 sm:justify-end ml-16  z-10">
+
+          <div className="absolute bottom-0 w-full flex justify-end md:justify-end xl:justify-end 0 sm:justify-end ml-16 z-10">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, ease: "easeOut" }}
-              whileHover={{ scale: 1.03 }}
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1, ease: "easeOut" }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
               className="relative w-[85%] sm:w-[50%] md:w-[75%] lg:w-[55%] xl:w-[45%]"
             >
               <Image
@@ -65,63 +74,93 @@ function HomeBentogrid() {
                 alt="linear demo image"
                 width={800}
                 height={800}
-                className="object-cover rounded-2xl z-10 w-full h-auto select-none pointer-events-none "
+                className="object-cover rounded-2xl z-10 w-full h-auto select-none pointer-events-none"
                 draggable={false}
                 onContextMenu={(e) => e.preventDefault()}
               />
             </motion.div>
           </div>
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-background opacity-20" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-background opacity-20" />
+
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-white/20 opacity-0 group-hover:opacity-80 transition-opacity duration-300 ease-in-out" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-white/20 opacity-0 group-hover:opacity-80 transition-opacity duration-300 ease-in-out" />
         </WobbleCard>
-        <WobbleCard containerClassName="relative shadow-2xl shadow-black md:col-span-2 min-h-[400px]">
-           
-          
-          <div className="absolute left-[-23px] top-35 sm:right-[20px] sm:left-[10px] md:left-[-100px] lg:left-[-60px] xl:left-[-23px] z-10">
-              
-          <Earth 
-           className=" w-[450px]" />
+
+      <WobbleCard
+  containerClassName="relative shadow-2xl shadow-black md:col-span-2 min-h-[400px] group"
+>
+          <motion.div
+            className="flex flex-col gap-4 justify-center items-center"
+            initial={{ opacity: 0, y: -30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              type: "spring",
+              stiffness: 70,
+              damping: 12,
+              mass: 0.5,
+            }}
+          >
+            <div className="flex flex-col absolute top-14 justify-center gap-5 items-center p-1.5">
+              <motion.span
+                className="pointer-events-none z-10 h-full md:text-[22px] sm:text-[20px] lg:text-[17px] xl:text-[22px] 2xl:text-[20px] whitespace-pre-wrap text-white text-shadow bg-clip-text text-center text-[30px] font-bold leading-none tracking-tighter"
+                initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, amount: 0.6 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+              >
+                Passionate about cutting-edge technologies
+              </motion.span>
+            </div>
+          </motion.div>
+
+          <div className="absolute left-[-28px] top-35 sm:right-[20px] sm:left-[10px] md:left-[-100px] lg:left-[-60px] xl:left-[-23px] z-10">
+            <Earth className=" w-[450px] " />
           </div>
-           <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-background opacity-20" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-background opacity-20" />
+
+         <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-white/20 opacity-0 group-hover:opacity-80 transition-opacity duration-300 ease-in-out" />
+  <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-white/20 opacity-0 group-hover:opacity-80 transition-opacity duration-300 ease-in-out" />
         </WobbleCard>
+
         <div className="md:col-span-2">
-          <div className="grid grid-cols-3 gap-2 h-full">
+          <div className="grid grid-cols-3 gap-2 h-full items-center justify-center">
             {socialData.map(({ id, href, icon: Icon }) => (
               <WobbleCard
                 key={id}
-                containerClassName="h-30 rounded-2xl shadow-2xl shadow-black relative"
+                containerClassName="h-30 rounded-2xl shadow-2xl shadow-black relative group" // group add kiya
               >
                 <Link
                   href={href}
                   target="_blank"
-                  className="absolute inset-0 flex items-center justify-center group"
+                  className="absolute inset-0 flex items-center justify-center"
                 >
                   <Icon
                     sx={{
                       fontSize: 60,
                       color: "white",
                     }}
-                    className="
-        transition-all duration-700 ease-in-out
-        drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]
-        group-hover:drop-shadow-[0_0_20px_rgba(255,255,255,0.9)]
+                    className=" transition-all duration-700 ease-in-out drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]  group-hover:drop-shadow-[0_0_20px_rgba(255,255,255,0.9)]
       "
                   />
                 </Link>
+                <div className="absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-white/50 opacity-0 group-hover:opacity-50 transition-opacity duration-300 ease-in-out pointer-events-none" />
+                <div className="absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-white/50 opacity-0 group-hover:opacity-50 transition-opacity duration-300 ease-in-out pointer-events-none" />
               </WobbleCard>
             ))}
-            <WobbleCard containerClassName="h-30 rounded-2xl shadow-2xl bg-pink-700 shadow-black col-span-3 relative">
+            <WobbleCard containerClassName="h-30 rounded-2xl shadow-2xl bg-pink-700 shadow-black col-span-3 relative group">
               <InteractiveDemo />
+
               <div className="absolute inset-0 flex flex-col items-center justify-center px-14 text-center space-y-2">
-                <p className="text-sm text-white  font-[600] text-shadow ">
+                <p className="text-sm text-white font-[700] text-shadow ">
                   Click below to copy my email instantly ✨
                 </p>
                 <GlassCopyBtn command="Dhirajbhavsar.offcial@gmail.com" />
               </div>
+
+              <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-white/20 opacity-0 group-hover:opacity-80 transition-opacity duration-300 ease-in-out" />
+              <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-white/20 opacity-0 group-hover:opacity-80 transition-opacity duration-300 ease-in-out" />
             </WobbleCard>
           </div>
         </div>
+
         <WobbleCard containerClassName="relative shadow-2xl shadow-black md:col-span-2 min-h-[250px]">
           <div className="relative z-10">
             <h2 className="text-xl font-semibold text-white">
@@ -133,16 +172,20 @@ function HomeBentogrid() {
           </div>
         </WobbleCard>
 
-        {/* Driven by curiosity */}
         <WobbleCard containerClassName="relative shadow-2xl bg-pink-800 shadow-black md:col-span-2 min-h-[250px]">
           <GridPattern />
           <div className="flex justify-center relative bottom-13 items-center px-4">
-            <h2 className="font-[800] text-white text-xl text-center text-shadow max-w-xl line-clamp-2">
+            <motion.h2
+              initial={{ opacity: 0, y: 20, scale: -0.95 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, amount: 0.6 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="font-[800] lg:text-[17px] text-white text-center text-shadow max-w-xl line-clamp-2"
+            >
               Driven by curiosity, powered by Technology
-            </h2>
+            </motion.h2>
           </div>
 
-          {/* Background animations */}
           <div className="absolute inset-0 z-0">
             <SkillsMarquee />
             <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-background opacity-20" />
@@ -150,7 +193,6 @@ function HomeBentogrid() {
           </div>
         </WobbleCard>
 
-        {/* Bottom Full Width */}
         <WobbleCard containerClassName="relative shadow-2xl shadow-black md:col-span-6 min-h-[350px] bg-neutral-900">
           <div className="relative z-10 max-w-lg">
             <h2 className="text-2xl md:text-3xl font-semibold text-white">
