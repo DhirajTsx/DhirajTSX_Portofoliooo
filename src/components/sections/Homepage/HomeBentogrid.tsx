@@ -17,6 +17,10 @@ import Earth from "@/components/ui/globe";
 import { FlipText } from "@/components/magicui/FlipText";
 import ProgressiveBlur from "@/components/magicui/ProgressiveBlur";
 import GlassButton from "@/components/customUi/GlassButton";
+
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import ConnectButton from "@/components/customUi/GlassButton";
+import { ShinyButton } from "@/components/magicui/shiny-button";
 function HomeBentogrid() {
   const socialData = [
     {
@@ -50,17 +54,34 @@ function HomeBentogrid() {
             <ScrollBasedVelocityDemo />
           </motion.div>
 
-          {/* Content */}
-          <div className="absolute bottom-6 left-0 w-full px-4 md:px-8 z-50">
-            <motion.div  initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, ease: "easeOut" }}
-              className="text-sm sm:text-base md:text-lg lg:text-xl text-neutral-200 text-center md:text-left max-w-full md:max-w-md leading-relaxed">
-               <GlassButton text="About Me" href="about" />
+          <div className="absolute bottom-10 left-0 w-full px-4 md:px-8 z-50 flex flex-col items-start gap-2">
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="text-sm md:text-base text-white/80 max-w-md"
+            >
+              Hi, I’m <span className=" bg-indigo-800 text-white">Dhiraj Bhawsar</span> — a passionate <span className=" bg-pink-800">MERN Stack Developer</span> who
+              loves building modern web apps with clean UI and smooth user
+              experience.
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+              className="flex items-center"
+            >
+              <ShinyButton
+                text="Click here to explore me"
+                href="/about"
+                className="font-semibold border-b-1 border-slate-200/10 cursor-pointer text-sm text-white/70 hover:text-white/60"
+              />
             </motion.div>
           </div>
 
-          <div className="absolute bottom-0 w-full flex justify-end md:justify-end xl:justify-end 0 sm:justify-end ml-16 z-10">
+          <div className="absolute bottom-0 w-full flex justify-end md:justify-end xl:justify-end sm:justify-end ml-16 z-10">
             <motion.div
               initial={{ opacity: 0, x: 100 }}
               animate={{ opacity: 1, x: 0 }}
@@ -81,13 +102,12 @@ function HomeBentogrid() {
             </motion.div>
           </div>
 
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-white/20 opacity-0 group-hover:opacity-80 transition-opacity duration-300 ease-in-out" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-white/20 opacity-0 group-hover:opacity-80 transition-opacity duration-300 ease-in-out" />
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-black/20 opacity-0 group-hover:opacity-80 transition-opacity duration-300 ease-in-out" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-black/20 opacity-0 group-hover:opacity-80 transition-opacity duration-300 ease-in-out" />
+          <div className="pointer-events-none absolute z-40 bottom-0 left-0 w-full h-24 bg-gradient-to-t from-black/60 to-transparent opacity-100 transition-opacity duration-500 ease-in-out" />
         </WobbleCard>
 
-      <WobbleCard
-  containerClassName="relative shadow-2xl shadow-black md:col-span-2 min-h-[400px] group"
->
+        <WobbleCard containerClassName="relative shadow-2xl shadow-black md:col-span-2 min-h-[400px] group">
           <motion.div
             className="flex flex-col gap-4 justify-center items-center"
             initial={{ opacity: 0, y: -30 }}
@@ -101,13 +121,13 @@ function HomeBentogrid() {
           >
             <div className="flex flex-col absolute top-14 justify-center gap-5 items-center p-1.5">
               <motion.span
-                className="pointer-events-none z-10 h-full md:text-[22px] sm:text-[20px] lg:text-[17px] xl:text-[22px] 2xl:text-[20px] whitespace-pre-wrap text-white text-shadow bg-clip-text text-center text-[30px] font-bold leading-none tracking-tighter"
+                className="pointer-events-none z-10 h-full md:text-[22px] sm:text-[20px] lg:text-[17px] xl:text-[22px] 2xl:text-[20px] whitespace-pre-wrap text-white/90 text-shadow bg-clip-text text-center text-[22px] font-bold leading-none tracking-tighter"
                 initial={{ opacity: 0, y: 20, scale: 0.95 }}
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true, amount: 0.6 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
               >
-                Passionate about cutting-edge technologies
+                Available to work across US, USA & India time zones
               </motion.span>
             </div>
           </motion.div>
@@ -116,8 +136,9 @@ function HomeBentogrid() {
             <Earth className=" w-[450px] " />
           </div>
 
-         <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-white/20 opacity-0 group-hover:opacity-80 transition-opacity duration-300 ease-in-out" />
-  <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-white/20 opacity-0 group-hover:opacity-80 transition-opacity duration-300 ease-in-out" />
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-white/20 opacity-0 group-hover:opacity-80 transition-opacity duration-300 ease-in-out" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-white/20 opacity-0 group-hover:opacity-80 transition-opacity duration-300 ease-in-out" />
+           <div className="pointer-events-none absolute z-40 bottom-0 left-0 w-full h-24 bg-gradient-to-t from-black to-transparent opacity-100 transition-opacity duration-500 ease-in-out" />
         </WobbleCard>
 
         <div className="md:col-span-2">
@@ -125,7 +146,7 @@ function HomeBentogrid() {
             {socialData.map(({ id, href, icon: Icon }) => (
               <WobbleCard
                 key={id}
-                containerClassName="h-30 rounded-2xl shadow-2xl shadow-black relative group" // group add kiya
+                containerClassName="h-30 rounded-2xl  shadow-2xl shadow-black relative group" // group add kiya
               >
                 <Link
                   href={href}
@@ -137,7 +158,7 @@ function HomeBentogrid() {
                       fontSize: 60,
                       color: "white",
                     }}
-                    className=" transition-all duration-700 ease-in-out drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]  group-hover:drop-shadow-[0_0_20px_rgba(255,255,255,0.9)]
+                    className=" transition-all  duration-700 ease-in-out drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]  group-hover:drop-shadow-[0_0_20px_rgba(255,255,255,0.9)]
       "
                   />
                 </Link>
@@ -145,11 +166,11 @@ function HomeBentogrid() {
                 <div className="absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-white/50 opacity-0 group-hover:opacity-50 transition-opacity duration-300 ease-in-out pointer-events-none" />
               </WobbleCard>
             ))}
-            <WobbleCard containerClassName="h-30 rounded-2xl shadow-2xl bg-pink-700 shadow-black col-span-3 relative group">
+            <WobbleCard containerClassName="h-30 rounded-2xl shadow-2xl bg-black shadow-black col-span-3 relative group">
               <InteractiveDemo />
 
-              <div className="absolute inset-0 flex flex-col items-center justify-center px-14 text-center space-y-2">
-                <p className="text-sm text-white font-[700] text-shadow ">
+              <div className="absolute  inset-0 flex flex-col items-center justify-center px-14 text-center space-y-2">
+                <p className="text-sm text-white font-[600] text-shadow ">
                   Click below to copy my email instantly ✨
                 </p>
                 <GlassCopyBtn command="Dhirajbhavsar.offcial@gmail.com" />
@@ -172,7 +193,7 @@ function HomeBentogrid() {
           </div>
         </WobbleCard>
 
-        <WobbleCard containerClassName="relative shadow-2xl bg-pink-800 shadow-black md:col-span-2 min-h-[250px]">
+        <WobbleCard containerClassName="relative shadow-2xl bg-black shadow-black md:col-span-2 min-h-[250px]">
           <GridPattern />
           <div className="flex justify-center relative bottom-13 items-center px-4">
             <motion.h2
@@ -180,19 +201,15 @@ function HomeBentogrid() {
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true, amount: 0.6 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className="font-[800] lg:text-[17px] text-white text-center text-shadow max-w-xl line-clamp-2"
+              className="pointer-events-none z-10 h-full md:text-[22px] sm:text-[20px] lg:text-[17px] xl:text-[22px] 2xl:text-[20px] whitespace-pre-wrap text-white text-shadow bg-clip-text text-center text-[20px] font-bold leading-none tracking-tighter"
             >
               Driven by curiosity, powered by Technology
             </motion.h2>
           </div>
-
           <div className="absolute inset-0 z-0">
             <SkillsMarquee />
-            <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-background opacity-20" />
-            <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-background opacity-20" />
           </div>
         </WobbleCard>
-
         <WobbleCard containerClassName="relative shadow-2xl shadow-black md:col-span-6 min-h-[350px] bg-neutral-900">
           <div className="relative z-10 max-w-lg">
             <h2 className="text-2xl md:text-3xl font-semibold text-white">

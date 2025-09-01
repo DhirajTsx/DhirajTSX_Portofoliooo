@@ -13,7 +13,7 @@ export interface ProgressiveBlurProps {
 
 export function ProgressiveBlur({
   className,
-  height = "10%",
+  height = "20%",
   position = "bottom",
   blurLevels = [0.5, 1, 2, 4, 8, 16, 32, 64],
 }: ProgressiveBlurProps) {
