@@ -26,19 +26,24 @@ export default function ThemeToggleButton({
 
   const styleId = "theme-transition-styles"
 
-  const updateStyles = React.useCallback((css: string) => {
-    if (typeof window === "undefined") return
+  // ✅ Updated to accept optional second argument
+  const updateStyles = React.useCallback(
+    (css: string, name?: string) => {
+      if (typeof window === "undefined") return
 
-    let styleElement = document.getElementById(styleId) as HTMLStyleElement
+      let styleElement = document.getElementById(styleId) as HTMLStyleElement
 
-    if (!styleElement) {
-      styleElement = document.createElement("style")
-      styleElement.id = styleId
-      document.head.appendChild(styleElement)
-    }
+      if (!styleElement) {
+        styleElement = document.createElement("style")
+        styleElement.id = styleId
+        document.head.appendChild(styleElement)
+      }
 
-    styleElement.textContent = css
-  }, [])
+      styleElement.textContent = css
+      // name can be used later if needed
+    },
+    []
+  )
 
   const toggleTheme = React.useCallback(() => {
     const animation = createAnimation(variant, start, url)
