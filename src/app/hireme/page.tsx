@@ -8,7 +8,7 @@ import { StarsBackground } from "@/components/ui/stars-background";
 import InteractiveDemo from "@/components/ui/interactiveGridDemo";
 import ProgressiveBlur from "@/components/magicui/ProgressiveBlur";
 
-import HomeBentogrid from "@/components/sections/Homepage/HomeBentogrid";
+// import HomeBentogrid from "@/components/sections/Homepage/HomeBentogrid";
 
 export default function Home() {
   const { resolvedTheme } = useTheme();

@@ -16,7 +16,7 @@ import { motion } from "framer-motion";
 import Earth from "@/components/ui/globe";
 // import { FlipText } from "@/components/magicui/FlipText";
 import ProgressiveBlur from "@/components/magicui/ProgressiveBlur";
-import GlassButton from "@/components/customUi/GlassButton";
+// import GlassButton from "@/components/customUi/GlassButton";
 
 // import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 // import ConnectButton from "@/components/customUi/GlassButton";

@@ -7,7 +7,7 @@ import Navbar from "@/components/layout/navbar/Navbar";
 import { MobileDock } from "@/components/layout/navbar/MobileDock";
 import type { Metadata } from "next";
 import { LenisProvider } from "@/components/providers/LenisProvider";
-import { SmoothCursor } from "@/components/magicui/smooth-cursor";
+// import { SmoothCursor } from "@/components/magicui/smooth-cursor";
 const outfit = Outfit({
   variable: "--font-outfit",
   subsets: ["latin"],
