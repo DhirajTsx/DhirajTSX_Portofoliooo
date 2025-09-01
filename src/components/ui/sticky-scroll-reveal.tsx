@@ -4,19 +4,23 @@ import { useMotionValueEvent, useScroll } from "motion/react";
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 
-export const StickyScroll = ({
+interface StickyScrollItem {
+  title: string;
+  description: string;
+  content?: React.ReactNode; // replaced `any` with React.ReactNode
+}
+
+interface StickyScrollProps {
+  content: StickyScrollItem[];
+  contentClassName?: string;
+}
+
+export const StickyScroll: React.FC<StickyScrollProps> = ({
   content,
   contentClassName,
-}: {
-  content: {
-    title: string;
-    description: string;
-    content?: React.ReactNode | any;
-  }[];
-  contentClassName?: string;
 }) => {
   const [activeCard, setActiveCard] = React.useState(0);
-  const ref = useRef<any>(null);
+  const ref = useRef<HTMLDivElement>(null); // replaced `any` with HTMLDivElement
 
   const { scrollYProgress } = useScroll({
     container: ref, // sticky scroll inside container
